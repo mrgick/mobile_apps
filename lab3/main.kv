@@ -1,0 +1,79 @@
+<MainScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Праздники"
+            left_action_items: [["star-settings", lambda x: root.show_settings()]]
+
+        MDScrollView:
+            padding: "20sp"
+            MDList:
+                id: holiday_list
+
+<DetailScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+        
+        MDTopAppBar:
+            title: "Праздники"
+            left_action_items: [["keyboard-backspace", root.show_holidays_list]]
+        
+        MDBoxLayout:
+            orientation: "vertical"
+            spacing: "10sp"
+            padding: "20sp"
+            
+            MDLabel:
+                id: name_label
+                markup: True
+                halign: "center"
+                font_size: "24sp"
+
+                
+            MDLabel:
+                id: date_label
+                markup: True
+                halign: "center"
+                font_size: "24sp"
+
+                
+            MDLabel:
+                id: description_label
+                markup: True
+                halign: "center"
+                font_size: "20sp"
+
+
+<SettingsScreen>:
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            title: "Праздники"
+            left_action_items: [["keyboard-backspace", root.show_holidays_list]]
+
+        MDGridLayout:
+            cols: 2
+            padding: "20sp"
+            row_force_default:True
+            row_default_height:"48sp"
+
+            MDLabel:
+                text: "Цветовая тема"
+                font_size: "24sp"
+                id: theme_label
+                
+            MDSwitch:
+                active: app.theme_cls.theme_style == "Dark"
+                on_active: on_release: app.switch_theme(self.active)
+
+<MDLabel>
+    theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
+<MDTopAppBar>
+    theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
+<TwoLineListItem>
+    theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
+    secondary_theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
+    font_style: "H6"
+    secondary_font_style: "Subtitle1"
