@@ -4,19 +4,22 @@
 
         MDTopAppBar:
             title: "Праздники"
+            anchor_title: "left"
             left_action_items: [["star-settings", lambda x: root.show_settings()]]
 
         MDScrollView:
             padding: "20sp"
             MDList:
+                padding: "10sp"
                 id: holiday_list
 
 <DetailScreen>:
     MDBoxLayout:
         orientation: "vertical"
-        
+
         MDTopAppBar:
             title: "Праздники"
+            anchor_title: "left"
             left_action_items: [["keyboard-backspace", root.show_holidays_list]]
         
         MDBoxLayout:
@@ -25,6 +28,7 @@
             padding: "20sp"
 
             MDLabel:
+                padding: [0,"10sp",0,0]
                 id: title_label
                 font_size: "24sp"
                 height: "48sp"
@@ -60,9 +64,10 @@
                         pos: self.pos
 
             MDLabel:
+                padding: [0, "10sp", 0, "30sp"]
                 id: description_label
                 markup: True
-                font_size: "22sp"
+                font_size: "24sp"
                 halign: 'justify'
                 valign: 'top'
                 adaptive_height: True
@@ -84,11 +89,12 @@
 
         MDTopAppBar:
             title: "Праздники"
+            anchor_title: "left"
             left_action_items: [["keyboard-backspace", root.show_holidays_list]]
 
         MDGridLayout:
             cols: 2
-            padding: "20sp"
+            padding: ["20sp", "20sp", "40sp", "20sp"]
             row_force_default:True
             row_default_height:"60sp"
 

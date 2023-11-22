@@ -78,6 +78,7 @@ class MainScreen(MDScreen):
                 text=holiday["name"],
                 secondary_text=holiday["date"],
             )
+            holiday_item.height = "100sp"
             holiday_item.bind(
                 on_release=lambda instance, h=holiday: self.show_detail_holiday(h)
             )
