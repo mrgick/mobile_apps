@@ -20,29 +20,62 @@
             left_action_items: [["keyboard-backspace", root.show_holidays_list]]
         
         MDBoxLayout:
-            orientation: "vertical"
+            orientation: 'vertical'
             spacing: "10sp"
             padding: "20sp"
-            
-            MDLabel:
-                id: name_label
-                markup: True
-                halign: "center"
-                font_size: "24sp"
 
-                
+            MDLabel:
+                id: title_label
+                font_size: "24sp"
+                height: "48sp"
+                size_hint_y: None
+                markup: True
+
+            Widget:
+                size_hint_y: None
+                height: "2sp"
+                canvas:
+                    Color:
+                        rgba: app.theme_cls.divider_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
             MDLabel:
                 id: date_label
-                markup: True
-                halign: "center"
                 font_size: "24sp"
+                height: "48sp"
+                size_hint_y: None
+                markup: True
 
-                
+
+            Widget:
+                size_hint_y: None
+                height: "2sp"
+                canvas:
+                    Color:
+                        rgba: app.theme_cls.divider_color
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+
             MDLabel:
                 id: description_label
                 markup: True
-                halign: "center"
-                font_size: "20sp"
+                font_size: "22sp"
+                halign: 'justify'
+                valign: 'top'
+                adaptive_height: True
+
+            Image:
+                source: ''
+                size: self.texture_size if app.show_image else (0, 0)
+                size_hint: (1, 1.3)  if app.show_image else (None, None)
+                opacity: 1 if app.show_image else 0
+                id: image_holiday
+
+            MDLabel:
+                height: "0sp" if app.show_image else self.texture_size[1]
 
 
 <SettingsScreen>:
@@ -57,16 +90,37 @@
             cols: 2
             padding: "20sp"
             row_force_default:True
-            row_default_height:"48sp"
+            row_default_height:"60sp"
 
             MDLabel:
                 text: "Цветовая тема"
                 font_size: "24sp"
                 id: theme_label
-                
+                canvas.before:
+                    Color:
+                        rgba: app.theme_cls.divider_color
+                    Line:
+                        width: 1
+                        points: [self.x, self.y, self.x + self.width, self.y]
+
             MDSwitch:
                 active: app.theme_cls.theme_style == "Dark"
                 on_active: on_release: app.switch_theme(self.active)
+                canvas.before:
+                    Color:
+                        rgba: app.theme_cls.divider_color
+                    Line:
+                        width: 1
+                        points: [self.x, self.y, self.x + self.width, self.y]
+
+            MDLabel:
+                text: "Показывать картинку"
+                font_size: "24sp"
+                id: image_label
+                
+            MDSwitch:
+                active: app.show_image
+                on_active: on_release: app.switch_image(self.active)
 
 <MDLabel>
     theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
@@ -75,5 +129,6 @@
 <TwoLineListItem>
     theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
     secondary_theme_text_color: "Primary" if app.theme_cls.theme_style == "Light" else "Secondary"
-    font_style: "H6"
-    secondary_font_style: "Subtitle1"
+    font_style: "H5"
+    secondary_font_style: "H6"
+    height: "48sp"
